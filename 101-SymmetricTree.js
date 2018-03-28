@@ -56,20 +56,31 @@ var compare = function(root1, root2) {
   if(!root1 && !root2) {
     return true;
   }
-  if((root1 && !root2) || (!root1 && root2)) {
-    return false;
+  if(root1 && root2) {
+    if(root1.val == root2.val && compare(root1.left, root2.right) && compare(root1.right, root2.left)) {
+      return true;
+    }
   }
-  if(!compare(root1.left, root2.right)) {
-    return false;
-  }
-  if(root1.val != root2.val) {
-    return false;
-  }
-  if(!compare(root1.right, root2.left)) {
-    return false;
-  }
-  return true;
-}
+  return false;
+};
+//var compare = function(root1, root2) {
+  //if(!root1 && !root2) {
+    //return true;
+  //}
+  //if((root1 && !root2) || (!root1 && root2)) {
+    //return false;
+  //}
+  //if(!compare(root1.left, root2.right)) {
+    //return false;
+  //}
+  //if(root1.val != root2.val) {
+    //return false;
+  //}
+  //if(!compare(root1.right, root2.left)) {
+    //return false;
+  //}
+  //return true;
+//}
 var root1 = {
   val: 1,
   left: {

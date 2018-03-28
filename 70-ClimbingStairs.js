@@ -1,17 +1,19 @@
-//递归方法 但是时间复杂度为O(2^N) 超时了...
-/*
+//递归
+var stairs = {
+  1: 1,
+  2: 2
+} 
 var climbStairs = function(n) {
-    if (n == 1) {
-        return 1;
-    } else if (n == 2) {
-        return 2;
+    if(n in stairs) {
+      return stairs[n];
     } else {
-        return climbStairs(n - 1) + climbStairs(n - 2);
+      var output = climbStairs(n - 1) + climbStairs(n - 2);
+      stairs[n] = output;
+      return output;
     }
 }
-*/
-//改用 for 循环方式 时间复杂度为O(N) 
-var climbStairs = function(n) {
+//for 循环
+var climbStairs1 = function(n) {
     var r1 = 1;
     var r2 = 2;
     var r;
@@ -29,3 +31,4 @@ var climbStairs = function(n) {
     }
 }
 console.log(climbStairs(44));
+console.log(climbStairs1(44));
