@@ -1,38 +1,34 @@
 var isSubtree = function(s, t) {
-
-}
-var s = {
-  val: 3,
-  left: {
-    val: 4,
-    left: {
-      val: 1,
-      left: null,
-      right: null
-    },
-    right: {
-      val: 2,
-      left: null,
-      right: null
+  getMaximumDepth(s);
+  getMaximumDepth(t);
+  return isSub(s, t);
+};
+var isSub = function(s, t) {
+  if(!s) return false;
+  if(s.depth == t.depth) {
+    return isEqual(s, t);
+  } else if(s.depth < t.depth) {
+    return false;
+  } else {
+    return isSub(s.left, t) || isSub(s.right, t);
+  }
+};
+var isEqual = function(s, t) {
+  if(!s && !t) {
+    return true;
+  } else if(s && t) {
+    if(s.val == t.val) {
+      return isEqual(s.left, t.left) && isEqual(s.right, t.right);
+    } else {
+      return false;
     }
-  },
-  right: {
-    val: 5,
-    left: null,
-    right: null
+  } else {
+    return false;
   }
-}
-var t = {
-  val: 4,
-  left: {
-    val: 1,
-    left: null,
-    right: null
-  },
-  right: {
-    val: 2,
-    left: null,
-    right: null
-  }
-}
-console.log(isSubtree(s, t));
+};
+var getMaximumDepth = function(node) {
+  if(!node) return 0;
+  var depth = Math.max(getMaximumDepth(node.left), getMaximumDepth(node.right)) + 1;
+  node.depth = depth;
+  return depth;
+};
